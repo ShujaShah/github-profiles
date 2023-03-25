@@ -19,7 +19,7 @@ export const GithubProvider = ({ children }) => {
 
   // Get Search users
   const searchUsers = async (text) => {
-    setLoading();
+    setLoading(); // set the loader while fetching the users
 
     const params = new URLSearchParams({
       q: text,
