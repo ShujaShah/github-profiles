@@ -4,7 +4,7 @@ import githubReducer from "./GithubReducers";
 const GithubContext = createContext();
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-//const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   // const [users, setUsers] = useState([]);
@@ -12,20 +12,18 @@ export const GithubProvider = ({ children }) => {
 
   const initialState = {
     users: [],
-    loading: true,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(githubReducer, initialState); // using the reducer hook
 
   const fetchUsers = async () => {
-    const response = await fetch(
-      `${GITHUB_URL}/users`
-      // {
-      //   headers: {
-      //     Authorization: `token ${GITHUB_TOKEN}`,
-      //   },
-      // }
-    );
+    setLoading();
+    const response = await fetch(`${GITHUB_URL}/users`, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
     const data = await response.json();
     console.log(data);
     dispatch({
@@ -34,6 +32,12 @@ export const GithubProvider = ({ children }) => {
     });
     // setUsers(data);
     // setLoading(false);
+  };
+
+  const setLoading = () => {
+    dispatch({
+      type: "SET_LOADING",
+    });
   };
 
   return (

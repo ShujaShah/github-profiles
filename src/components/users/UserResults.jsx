@@ -6,10 +6,10 @@ import GithubContext from "../../context/github/GithubContext";
 
 function UserResults() {
   const { users, loading, fetchUsers } = useContext(GithubContext);
-
-  useEffect(() => {
-    fetchUsers();
-  }, );
+  //removing the get users since we donot want to get the users at first
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
   if (!loading) {
     return (
