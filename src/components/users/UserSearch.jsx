@@ -8,7 +8,7 @@ function UserSearch() {
 
   const { users, searchUsers, clearUsers } = useContext(GithubContext);
 
-  const { setAlert } = useContext(AlertContext);
+  const { setAlert } = useContext(AlertContext); //to get the alert context to be used here
 
   const handleChange = (e) => setText(e.target.value);
 
@@ -16,7 +16,7 @@ function UserSearch() {
     e.preventDefault();
     if (text === "") {
       // alert("Please enter something");
-      setAlert("Please enter something", "error");
+      setAlert("Please enter something", "error"); // to use the alertcontext to show the error message
     } else {
       searchUsers(text);
 
